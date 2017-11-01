@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, SetCalendarViewControllerDelegate {
 
     @IBOutlet weak var calendarView: UICollectionView!
     
-    let dateFormat = "yyyy-MM-dd"
+    
+    var startDateStr = "2016-01-01"
+    var endDateStr = "2020-02-01"
     
     let cellID = "cellID"
     let sectionHeaderID = "SectionHeader"
@@ -42,15 +44,18 @@ class ViewController: UIViewController {
         self.calendarView.showsVerticalScrollIndicator = false
         self.calendarView.showsHorizontalScrollIndicator = false
         
+        self.generateCalendar()
+        
+    }
+    
+    
+    func generateCalendar() {
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = self.dateFormat
-        let todayWithoutTime = TimeUtility.getDateFromString(dateString: dateFormatter.string(from: date), dateFormat: self.dateFormat)
+        dateFormatter.dateFormat = dateFormat
+        let todayWithoutTime = TimeUtility.getDateFromString(dateString: dateFormatter.string(from: date), dateFormat: dateFormat)
         
-        let startDateStr = "2016-01-01"
-        let endDateStr = "2020-02-01"
-        
-        if let startDate = TimeUtility.getDateFromString(dateString: startDateStr, dateFormat: self.dateFormat), let endDate = TimeUtility.getDateFromString(dateString: endDateStr, dateFormat: dateFormat) {
+        if let startDate = TimeUtility.getDateFromString(dateString: self.startDateStr, dateFormat: dateFormat), let endDate = TimeUtility.getDateFromString(dateString: self.endDateStr, dateFormat: dateFormat) {
             self.numberOfMonths = endDate.months(from: startDate)
             var nextMonth = startDate
             for index in 0...numberOfMonths {
@@ -61,7 +66,7 @@ class ViewController: UIViewController {
                 // Construct the date string like dateFormat string i.e. like "yyyy-MM-dd"
                 let monthStartDateStr = "\(monthDetails.yearsString)-\(monthDetails.monthsString.mapMonthString())-01"
                 let monthEndDateStr = "\(monthDetails.yearsString)-\(monthDetails.monthsString.mapMonthString())-\(monthDetails.numberOfDates)"
-                if let startDate = TimeUtility.getDateFromString(dateString: monthStartDateStr, dateFormat: self.dateFormat), let endDate = TimeUtility.getDateFromString(dateString: monthEndDateStr, dateFormat: self.dateFormat), let today = todayWithoutTime, self.todayDateIndexPath == nil {
+                if let startDate = TimeUtility.getDateFromString(dateString: monthStartDateStr, dateFormat: dateFormat), let endDate = TimeUtility.getDateFromString(dateString: monthEndDateStr, dateFormat: dateFormat), let today = todayWithoutTime, self.todayDateIndexPath == nil {
                     if today.isBetween(startDate, and: endDate) {
                         self.todayDateIndexPath = IndexPath(row: monthDetails.numberOfDates/2, section: index)
                     }
@@ -73,8 +78,8 @@ class ViewController: UIViewController {
             }
         }
         
+        self.calendarView.reloadData()
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         self.scrollsToToday()
@@ -100,6 +105,12 @@ class ViewController: UIViewController {
 
     func registerCells() {
         self.calendarView.register(DateCell.loadNib(), forCellWithReuseIdentifier: self.cellID)
+    }
+    
+    func generateCalendarButtonTapped(startDateStr: String, endDateStr: String) {
+        self.startDateStr = startDateStr
+        self.endDateStr = endDateStr
+        self.generateCalendar()
     }
 }
 
@@ -130,7 +141,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 let currentDateStr = "\(self.calendarMonthsDetails[indexPath.section].yearsString)-\(self.calendarMonthsDetails[indexPath.section].monthsString.mapMonthString())-\((indexPath.row + 1) - offSetPosition)"
                 print("Current Date String = \(currentDateStr)")
 
-                if let currentDate = TimeUtility.getDateFromString(dateString: currentDateStr, dateFormat: self.dateFormat) {
+                if let currentDate = TimeUtility.getDateFromString(dateString: currentDateStr, dateFormat: dateFormat) {
                     if self.checkIfDateIsSelectedOrNot(dateToComare: currentDate) {
                         cell.dateButton.setTitleColor(UIColor.white, for: UIControlState())
                         cell.dateButton.backgroundColor = UIColor.darkGray
@@ -154,7 +165,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                     let currentDateStr = "\(self.calendarMonthsDetails[indexPath.section].yearsString)-\(self.calendarMonthsDetails[indexPath.section].monthsString.mapMonthString())-\((indexPath.row + 1) - offSetPosition)"
                     print("Current Date String = \(currentDateStr)")
                     
-                    if let currentDate = TimeUtility.getDateFromString(dateString: currentDateStr, dateFormat: self.dateFormat) {
+                    if let currentDate = TimeUtility.getDateFromString(dateString: currentDateStr, dateFormat: dateFormat) {
                         if !self.selectedDates.contains(currentDate) {
                             self.selectedDates.append(currentDate)
                         } else {
@@ -239,7 +250,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         print("Current Date String = \(monthEndDateStr)")
 
         headerView.labelSelectedDatesCount.text = ""
-        if let monthStartDate = TimeUtility.getDateFromString(dateString: monthStartDateStr, dateFormat: self.dateFormat), let monthEndDate = TimeUtility.getDateFromString(dateString: monthEndDateStr, dateFormat: dateFormat) {
+        if let monthStartDate = TimeUtility.getDateFromString(dateString: monthStartDateStr, dateFormat: dateFormat), let monthEndDate = TimeUtility.getDateFromString(dateString: monthEndDateStr, dateFormat: dateFormat) {
             let selectedDatesCount = self.getNumberOfSelectedDatesInThisMonth(monthStartDate: monthStartDate, monthEndDate: monthEndDate)
             if selectedDatesCount > 0 {
                 headerView.labelSelectedDatesCount.text = selectedDatesCount > 1 ? "\(selectedDatesCount) dates" : "\(selectedDatesCount) date"
