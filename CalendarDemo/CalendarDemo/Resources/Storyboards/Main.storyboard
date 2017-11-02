@@ -20,8 +20,8 @@
         <!--Simple Calendar-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="CalendarDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CalendarDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -134,7 +134,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="aRV-3A-xsx">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ttk-2Y-Zcf">
                                         <rect key="frame" x="0.0" y="66" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -210,11 +210,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Simple Calendar" id="Xno-Nl-EI2">
-                        <barButtonItem key="leftBarButtonItem" title="Calendar" id="CM3-Ut-0cb">
+                        <barButtonItem key="leftBarButtonItem" title="Calendar" id="nYe-h0-Zaf">
                             <connections>
-                                <segue destination="nSn-ct-nIl" kind="popoverPresentation" popoverAnchorBarButtonItem="CM3-Ut-0cb" id="kkP-KQ-k36">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <action selector="calendarButtonAction:" destination="BYZ-38-t0r" id="9zq-Ns-B5q"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Today" id="oJv-aQ-60Y">
@@ -232,48 +230,54 @@
             <point key="canvasLocation" x="996" y="131.78410794602701"/>
         </scene>
         <!--Set Calendar View Controller-->
-        <scene sceneID="dzY-4b-OnW">
+        <scene sceneID="faq-c1-4cH">
             <objects>
-                <viewController storyboardIdentifier="SetCalendarViewController" id="nSn-ct-nIl" customClass="SetCalendarViewController" customModule="CalendarDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FmV-oc-dnb">
+                <viewController storyboardIdentifier="SetCalendarViewController" id="RsR-gk-2AX" customClass="SetCalendarViewController" customModule="CalendarDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gPW-af-4BJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Calendar Start Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iMx-xg-9UG">
-                                <rect key="frame" x="38" y="90" width="300" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Calendar End Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNI-jf-gzn">
-                                <rect key="frame" x="38" y="160" width="300" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qa0-ff-uBg">
-                                <rect key="frame" x="88" y="253" width="200" height="50"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Start date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Za5-Bt-S9N">
+                                <rect key="frame" x="62" y="96" width="250" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="NsF-0r-Nwn"/>
-                                    <constraint firstAttribute="width" constant="200" id="aYW-ia-7Oz"/>
+                                    <constraint firstAttribute="width" constant="250" id="qgR-L1-pk6"/>
+                                    <constraint firstAttribute="height" constant="30" id="wya-BO-MPy"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter End date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2EX-2h-9i4">
+                                <rect key="frame" x="62.5" y="146" width="250" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvs-bO-Vup">
+                                <rect key="frame" x="100.5" y="205" width="175" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HUq-LS-xc1"/>
+                                    <constraint firstAttribute="width" constant="175" id="Tec-nq-d86"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Generate Calendar"/>
+                                <state key="normal" title="Generate Calendar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="generateCalendarButtonAction:" destination="nSn-ct-nIl" eventType="touchUpInside" id="Glk-mL-Rug"/>
+                                    <action selector="generateCalendarButtonAction:" destination="RsR-gk-2AX" eventType="touchUpInside" id="5Ow-zy-WCe"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HF-Nt-K0U">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8II-cw-7DM">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="6mr-Dq-g9u"/>
+                                    <constraint firstAttribute="height" constant="44" id="gBK-af-qnd"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Set Calendar Duration" id="jua-nZ-6Va">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jvD-xm-rqS">
+                                    <navigationItem title="Set Calendar" id="YK5-L9-e3P">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="bOa-Qh-9E3">
                                             <connections>
-                                                <action selector="cancelButtonAction:" destination="nSn-ct-nIl" id="AQI-JZ-q7I"/>
+                                                <action selector="cancelButtonAction:" destination="RsR-gk-2AX" id="X3E-9F-GBi"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -282,30 +286,31 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9HF-Nt-K0U" firstAttribute="trailing" secondItem="7BX-SZ-e8C" secondAttribute="trailing" id="9Fc-5D-Elp"/>
-                            <constraint firstItem="aNI-jf-gzn" firstAttribute="leading" secondItem="iMx-xg-9UG" secondAttribute="leading" id="Fj8-nE-be8"/>
-                            <constraint firstItem="aNI-jf-gzn" firstAttribute="trailing" secondItem="iMx-xg-9UG" secondAttribute="trailing" id="RKo-z5-5pE"/>
-                            <constraint firstItem="9HF-Nt-K0U" firstAttribute="leading" secondItem="7BX-SZ-e8C" secondAttribute="leading" id="X11-LS-x6D"/>
-                            <constraint firstItem="iMx-xg-9UG" firstAttribute="leading" secondItem="7BX-SZ-e8C" secondAttribute="leading" constant="37.5" id="aIA-rr-Gyq"/>
-                            <constraint firstItem="aNI-jf-gzn" firstAttribute="height" secondItem="iMx-xg-9UG" secondAttribute="height" id="b7g-JG-FwK"/>
-                            <constraint firstItem="qa0-ff-uBg" firstAttribute="top" secondItem="aNI-jf-gzn" secondAttribute="bottom" constant="63" id="fk4-OC-X4D"/>
-                            <constraint firstItem="iMx-xg-9UG" firstAttribute="top" secondItem="9HF-Nt-K0U" secondAttribute="bottom" constant="26" id="fv8-Fc-hOD"/>
-                            <constraint firstItem="9HF-Nt-K0U" firstAttribute="top" secondItem="7BX-SZ-e8C" secondAttribute="top" id="gtk-HG-KHh"/>
-                            <constraint firstItem="aNI-jf-gzn" firstAttribute="top" secondItem="iMx-xg-9UG" secondAttribute="bottom" constant="40" id="gxE-sI-Osl"/>
-                            <constraint firstItem="7BX-SZ-e8C" firstAttribute="trailing" secondItem="iMx-xg-9UG" secondAttribute="trailing" constant="37.5" id="iv7-we-4Ks"/>
-                            <constraint firstItem="qa0-ff-uBg" firstAttribute="centerX" secondItem="aNI-jf-gzn" secondAttribute="centerX" id="tgn-G4-Dkf"/>
+                            <constraint firstItem="2EX-2h-9i4" firstAttribute="trailing" secondItem="Za5-Bt-S9N" secondAttribute="trailing" id="80Q-AK-1lj"/>
+                            <constraint firstItem="Za5-Bt-S9N" firstAttribute="top" secondItem="8II-cw-7DM" secondAttribute="bottom" constant="32" id="Bsn-Dn-uW9"/>
+                            <constraint firstItem="Cvs-bO-Vup" firstAttribute="top" secondItem="2EX-2h-9i4" secondAttribute="bottom" constant="29" id="Bwf-Sa-0IZ"/>
+                            <constraint firstItem="Za5-Bt-S9N" firstAttribute="centerX" secondItem="KYk-DJ-kPl" secondAttribute="centerX" id="Eew-XO-n1q"/>
+                            <constraint firstItem="2EX-2h-9i4" firstAttribute="height" secondItem="Za5-Bt-S9N" secondAttribute="height" id="NRA-Wc-dlZ"/>
+                            <constraint firstItem="Cvs-bO-Vup" firstAttribute="centerX" secondItem="2EX-2h-9i4" secondAttribute="centerX" id="SaO-Sc-wG9"/>
+                            <constraint firstItem="2EX-2h-9i4" firstAttribute="width" secondItem="Za5-Bt-S9N" secondAttribute="width" id="Wh8-zq-swK"/>
+                            <constraint firstItem="2EX-2h-9i4" firstAttribute="centerX" secondItem="Za5-Bt-S9N" secondAttribute="centerX" id="ZCv-vc-0tF"/>
+                            <constraint firstItem="2EX-2h-9i4" firstAttribute="leading" secondItem="Za5-Bt-S9N" secondAttribute="leading" id="cjl-Gi-yjj"/>
+                            <constraint firstItem="2EX-2h-9i4" firstAttribute="top" secondItem="Za5-Bt-S9N" secondAttribute="bottom" constant="20" id="e98-VG-L5d"/>
+                            <constraint firstItem="8II-cw-7DM" firstAttribute="trailing" secondItem="KYk-DJ-kPl" secondAttribute="trailing" id="jk6-2v-ty9"/>
+                            <constraint firstItem="8II-cw-7DM" firstAttribute="top" secondItem="KYk-DJ-kPl" secondAttribute="top" id="mDd-sl-Otu"/>
+                            <constraint firstItem="8II-cw-7DM" firstAttribute="leading" secondItem="KYk-DJ-kPl" secondAttribute="leading" id="wzb-24-bYp"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7BX-SZ-e8C"/>
+                        <viewLayoutGuide key="safeArea" id="KYk-DJ-kPl"/>
                     </view>
                     <connections>
-                        <outlet property="buttonGenerateCalendar" destination="qa0-ff-uBg" id="Xrq-3M-gAp"/>
-                        <outlet property="textEndDate" destination="aNI-jf-gzn" id="d7T-Yx-nGa"/>
-                        <outlet property="textStartDate" destination="iMx-xg-9UG" id="eG2-Ap-yBO"/>
+                        <outlet property="buttonGenerateCalendar" destination="Cvs-bO-Vup" id="dmn-8e-9J1"/>
+                        <outlet property="textEndDate" destination="2EX-2h-9i4" id="iM9-0a-bly"/>
+                        <outlet property="textStartDate" destination="Za5-Bt-S9N" id="nEY-2y-NKY"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1pO-yg-Oaw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P6H-H9-Jz4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1744.8" y="131.78410794602701"/>
+            <point key="canvasLocation" x="1776.8" y="131.78410794602701"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tfb-jj-FsS">

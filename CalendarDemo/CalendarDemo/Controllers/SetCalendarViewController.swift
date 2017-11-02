@@ -14,16 +14,19 @@ class SetCalendarViewController: UIViewController {
     @IBOutlet weak var textEndDate: UITextField!
     @IBOutlet weak var buttonGenerateCalendar: UIButton!
     
+    var activeTextField: UITextField?
+    
     weak var delegate: SetCalendarViewControllerDelegate?
     
     var endDateString:String = ""
     var startDateString:String = ""
     
+    var startDateAccessoryView : InputAccessoryView?
+    var endDateAccessoryView : InputAccessoryView?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.setupView()
         // Do any additional setup after loading the view.
     }
@@ -38,10 +41,17 @@ class SetCalendarViewController: UIViewController {
     }
     
     func setupView() {
-        self.textStartDate.delegate = self
-        self.textEndDate.delegate = self
-        self.textStartDate.inputView = self.returnTimeInputView(Date(), tag: 1)
-        self.textEndDate.inputView = self.returnTimeInputView(Date(), tag: 2)
+        self.initialiseInputAccessoryView()
+        self.textStartDate.inputView = self.returnTimeInputView(1)
+        self.textEndDate.inputView = self.returnTimeInputView(2)
+        
+        if self.startDateString.characters.count > 0 {
+            self.textStartDate.text = self.startDateString
+        }
+        
+        if self.endDateString.characters.count > 0 {
+            self.textEndDate.text = self.endDateString
+        }
     }
 
     @IBAction func generateCalendarButtonAction(_ sender: UIButton) {
@@ -58,9 +68,54 @@ class SetCalendarViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func initialiseInputAccessoryView(){
+        self.textStartDate.delegate = self
+        
+        startDateAccessoryView = InputAccessoryView.instanceFromNib()
+        if startDateAccessoryView != nil {
+            startDateAccessoryView?.previousButton.isHidden = true
+            startDateAccessoryView?.widthPreviousButton.constant = 0
+            
+            startDateAccessoryView?.warningLabel.text = ""
+            
+            startDateAccessoryView?.nextButton.setTitle("Next", for: UIControlState())
+            startDateAccessoryView?.nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+            startDateAccessoryView?.frame = CGRect(x: startDateAccessoryView!.frame.origin.x, y: startDateAccessoryView!.frame.origin.y, width: self.view.frame.size.width, height: startDateAccessoryView!.frame.size.height)
+            self.textStartDate.inputAccessoryView = startDateAccessoryView!
+        }
+        
+        
+        self.textEndDate.delegate = self
+        
+        endDateAccessoryView = InputAccessoryView.instanceFromNib()
+        if endDateAccessoryView != nil {
+            endDateAccessoryView?.previousButton.setTitle("Previous", for: UIControlState())
+            endDateAccessoryView?.previousButton.addTarget(self, action: #selector(previousButtonPressed), for: .touchUpInside)
+            
+            endDateAccessoryView?.nextButton.setTitle("Done", for: UIControlState())
+            endDateAccessoryView?.nextButton.addTarget(self, action: #selector(inputToolbarDonePressed), for: .touchUpInside)
+            
+            endDateAccessoryView?.warningLabel.text = ""
+            
+            endDateAccessoryView?.frame = CGRect(x: endDateAccessoryView!.frame.origin.x, y: endDateAccessoryView!.frame.origin.y, width: self.view.frame.size.width, height: endDateAccessoryView!.frame.size.height)
+            self.textEndDate.inputAccessoryView = endDateAccessoryView!
+        }
+        
+    }
     
+    @objc func nextButtonPressed() {
+        self.textEndDate.becomeFirstResponder()
+    }
     
-    func returnTimeInputView(_ minimumDate: Date, tag:Int) -> UIDatePicker {
+    @objc func previousButtonPressed() {
+        self.textStartDate.becomeFirstResponder()
+    }
+    
+    @objc func inputToolbarDonePressed() {
+        self.textEndDate.resignFirstResponder()
+    }
+    
+    func returnTimeInputView(_ tag:Int) -> UIDatePicker {
         let timePickerView  : UIDatePicker = UIDatePicker()
         timePickerView.datePickerMode = UIDatePickerMode.date
         if tag == 1 {
@@ -74,6 +129,9 @@ class SetCalendarViewController: UIViewController {
             if let minDate = TimeUtility.getDateFromString(dateString: self.startDateString, dateFormat: dateFormat) {
                 timePickerView.minimumDate = minDate
                 timePickerView.date = minDate
+            } else {
+                timePickerView.minimumDate = Date()
+                timePickerView.date = Date()
             }
             
             let dateFormatter = DateFormatter()
@@ -109,7 +167,7 @@ extension SetCalendarViewController: UITextFieldDelegate {
                 startDateString = TimeUtility.getStringFromDate(date: Date(), dateFormat: dateFormat)
             }
         } else if textField == self.textEndDate {
-            if startDateString.isEmpty{
+            if startDateString.isEmpty {
                 self.textStartDate.becomeFirstResponder()
             } else {
                 if endDateString.isEmpty {
@@ -118,6 +176,16 @@ extension SetCalendarViewController: UITextFieldDelegate {
             }
         }
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == self.textStartDate {
+            self.textStartDate.inputView = nil
+            self.textStartDate.inputView = self.returnTimeInputView(1)
+        } else if textField == self.textEndDate {
+            self.textEndDate.inputView = nil
+            self.textEndDate.inputView = self.returnTimeInputView(2)
+        }
     }
     
 }

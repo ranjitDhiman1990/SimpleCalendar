@@ -14,6 +14,8 @@
 		6A63ED591FA9C7CE00A3B2CF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A63ED581FA9C7CE00A3B2CF /* Utilities.swift */; };
 		6A7664221FA9F5E700BD0AE4 /* SetCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7664211FA9F5E700BD0AE4 /* SetCalendarViewController.swift */; };
 		6A7664241FA9FCE600BD0AE4 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7664231FA9FCE600BD0AE4 /* AppConstants.swift */; };
+		6A7664261FAADCEC00BD0AE4 /* InputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A7664251FAADCEC00BD0AE4 /* InputAccessoryView.xib */; };
+		6A7664281FAADD1400BD0AE4 /* InputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7664271FAADD1400BD0AE4 /* InputAccessoryView.swift */; };
 		6AD5B73B1FA4ACED00541609 /* SectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5B73A1FA4ACED00541609 /* SectionHeaderCollectionReusableView.swift */; };
 		6AFA3E601FA3649A00B281FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFA3E5F1FA3649A00B281FE /* AppDelegate.swift */; };
 		6AFA3E621FA3649A00B281FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFA3E611FA3649A00B281FE /* ViewController.swift */; };
@@ -30,6 +32,8 @@
 		6A63ED581FA9C7CE00A3B2CF /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		6A7664211FA9F5E700BD0AE4 /* SetCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCalendarViewController.swift; sourceTree = "<group>"; };
 		6A7664231FA9FCE600BD0AE4 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		6A7664251FAADCEC00BD0AE4 /* InputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputAccessoryView.xib; sourceTree = "<group>"; };
+		6A7664271FAADD1400BD0AE4 /* InputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAccessoryView.swift; sourceTree = "<group>"; };
 		6AD5B73A1FA4ACED00541609 /* SectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		6AFA3E5C1FA3649A00B281FE /* CalendarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AFA3E5F1FA3649A00B281FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +55,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A7664291FAAEBF600BD0AE4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6AFA3E611FA3649A00B281FE /* ViewController.swift */,
+				6A7664211FA9F5E700BD0AE4 /* SetCalendarViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6A76642A1FAAECF400BD0AE4 /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+				6A7664271FAADD1400BD0AE4 /* InputAccessoryView.swift */,
+			);
+			path = CommonViews;
+			sourceTree = "<group>";
+		};
+		6A76642B1FAAED1800BD0AE4 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6A7664231FA9FCE600BD0AE4 /* AppConstants.swift */,
+				6A63ED521FA9C6D100A3B2CF /* AppExtensions.swift */,
+				6A63ED541FA9C74F00A3B2CF /* EnumCollection.swift */,
+				6A63ED561FA9C78800A3B2CF /* Models.swift */,
+				6A63ED581FA9C7CE00A3B2CF /* Utilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		6A76642C1FAAED4F00BD0AE4 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				6A02C3511FA6FCA00068C00E /* Main.storyboard */,
+				6AFA3E681FA3649A00B281FE /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		6A76642D1FAAEDB500BD0AE4 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				6AD5B73A1FA4ACED00541609 /* SectionHeaderCollectionReusableView.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		6A76642E1FAAEDC700BD0AE4 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				6AFA3E711FA36AC300B281FE /* DateCell.xib */,
+				6A7664251FAADCEC00BD0AE4 /* InputAccessoryView.xib */,
+			);
+			path = XIBs;
+			sourceTree = "<group>";
+		};
+		6A76642F1FAAEDDF00BD0AE4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6AFA3E661FA3649A00B281FE /* Assets.xcassets */,
+				6A76642E1FAAEDC700BD0AE4 /* XIBs */,
+				6A76642C1FAAED4F00BD0AE4 /* Storyboards */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6AFA3E531FA3649A00B281FE = {
 			isa = PBXGroup;
 			children = (
@@ -70,19 +139,12 @@
 		6AFA3E5E1FA3649A00B281FE /* CalendarDemo */ = {
 			isa = PBXGroup;
 			children = (
-				6A7664231FA9FCE600BD0AE4 /* AppConstants.swift */,
+				6A76642F1FAAEDDF00BD0AE4 /* Resources */,
+				6A76642D1FAAEDB500BD0AE4 /* CustomCells */,
+				6A76642B1FAAED1800BD0AE4 /* Utilities */,
+				6A76642A1FAAECF400BD0AE4 /* CommonViews */,
+				6A7664291FAAEBF600BD0AE4 /* Controllers */,
 				6AFA3E5F1FA3649A00B281FE /* AppDelegate.swift */,
-				6AFA3E611FA3649A00B281FE /* ViewController.swift */,
-				6A7664211FA9F5E700BD0AE4 /* SetCalendarViewController.swift */,
-				6AD5B73A1FA4ACED00541609 /* SectionHeaderCollectionReusableView.swift */,
-				6A63ED521FA9C6D100A3B2CF /* AppExtensions.swift */,
-				6A63ED541FA9C74F00A3B2CF /* EnumCollection.swift */,
-				6A63ED561FA9C78800A3B2CF /* Models.swift */,
-				6A63ED581FA9C7CE00A3B2CF /* Utilities.swift */,
-				6AFA3E661FA3649A00B281FE /* Assets.xcassets */,
-				6A02C3511FA6FCA00068C00E /* Main.storyboard */,
-				6AFA3E681FA3649A00B281FE /* LaunchScreen.storyboard */,
-				6AFA3E711FA36AC300B281FE /* DateCell.xib */,
 				6AFA3E6B1FA3649A00B281FE /* Info.plist */,
 			);
 			path = CalendarDemo;
@@ -148,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AFA3E6A1FA3649A00B281FE /* LaunchScreen.storyboard in Resources */,
+				6A7664261FAADCEC00BD0AE4 /* InputAccessoryView.xib in Resources */,
 				6AFA3E671FA3649A00B281FE /* Assets.xcassets in Resources */,
 				6AFA3E721FA36AC300B281FE /* DateCell.xib in Resources */,
 				6A02C3521FA6FCA00068C00E /* Main.storyboard in Resources */,
@@ -165,6 +228,7 @@
 				6A7664241FA9FCE600BD0AE4 /* AppConstants.swift in Sources */,
 				6AFA3E621FA3649A00B281FE /* ViewController.swift in Sources */,
 				6A63ED591FA9C7CE00A3B2CF /* Utilities.swift in Sources */,
+				6A7664281FAADD1400BD0AE4 /* InputAccessoryView.swift in Sources */,
 				6AFA3E601FA3649A00B281FE /* AppDelegate.swift in Sources */,
 				6A63ED571FA9C78800A3B2CF /* Models.swift in Sources */,
 				6A63ED551FA9C74F00A3B2CF /* EnumCollection.swift in Sources */,

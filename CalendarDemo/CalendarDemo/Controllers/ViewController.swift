@@ -28,11 +28,12 @@ class ViewController: UIViewController, SetCalendarViewControllerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.setupView()
-        self.calendarView.reloadData()
     }
 
     
     func setupView() {
+        self.navigationController?.navigationBar.barTintColor = .white
+        
         self.registerCells()
         self.calendarView.delegate = self
         self.calendarView.dataSource = self
@@ -54,6 +55,10 @@ class ViewController: UIViewController, SetCalendarViewControllerDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         let todayWithoutTime = TimeUtility.getDateFromString(dateString: dateFormatter.string(from: date), dateFormat: dateFormat)
+        
+        self.calendarMonthsDetails = []
+        self.todayDateIndexPath = nil
+        self.numberOfMonths = 0
         
         if let startDate = TimeUtility.getDateFromString(dateString: self.startDateStr, dateFormat: dateFormat), let endDate = TimeUtility.getDateFromString(dateString: self.endDateStr, dateFormat: dateFormat) {
             self.numberOfMonths = endDate.months(from: startDate)
@@ -82,11 +87,21 @@ class ViewController: UIViewController, SetCalendarViewControllerDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.scrollsToToday()
+        //self.scrollsToToday()
     }
     
     @IBAction func todayButtonClicked(_ sender: UIBarButtonItem) {
         self.scrollsToToday()
+    }
+    
+    @IBAction func calendarButtonAction(_ sender: UIBarButtonItem) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyBoard.instantiateViewController(withIdentifier: "SetCalendarViewController") as? SetCalendarViewController {
+            vc.delegate = self
+            vc.startDateString = self.startDateStr
+            vc.endDateString = self.endDateStr
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     func scrollsToToday() {
