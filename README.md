@@ -1,5 +1,5 @@
 # SimpleCalendar
-This is a simple calendar application written in Swift 3.
+This is a simple calendar application written in Swift 4.
 
 This is screenshot of Calendar
 
