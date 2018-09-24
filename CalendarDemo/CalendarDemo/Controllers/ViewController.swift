@@ -149,8 +149,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let offSetPosition = self.getLastMonthEndDateIndexOffset(section: indexPath.section)
             
             if indexPath.row >= offSetPosition &&  indexPath.row < (self.numberOfDates(section: indexPath.section) + offSetPosition) {
-                cell.dateButton.setTitle("\((indexPath.row + 1) - offSetPosition)", for: UIControlState())
-                cell.dateButton.setTitleColor(UIColor.black, for: UIControlState())
+                cell.dateButton.setTitle("\((indexPath.row + 1) - offSetPosition)", for: UIControl.State())
+                cell.dateButton.setTitleColor(UIColor.black, for: UIControl.State())
                 cell.dateButton.backgroundColor = UIColor.clear
                 
                 let currentDateStr = "\(self.calendarMonthsDetails[indexPath.section].yearsString)-\(self.calendarMonthsDetails[indexPath.section].monthsString.mapMonthString())-\((indexPath.row + 1) - offSetPosition)"
@@ -158,17 +158,17 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 
                 if let currentDate = TimeUtility.getDateFromString(dateString: currentDateStr, dateFormat: dateFormat) {
                     if self.checkIfDateIsSelectedOrNot(dateToComare: currentDate) {
-                        cell.dateButton.setTitleColor(UIColor.white, for: UIControlState())
+                        cell.dateButton.setTitleColor(UIColor.white, for: UIControl.State())
                         cell.dateButton.backgroundColor = UIColor.darkGray
                     }
                     
                     if currentDate.isToday() {
-                        cell.dateButton.setTitleColor(UIColor.white, for: UIControlState())
+                        cell.dateButton.setTitleColor(UIColor.white, for: UIControl.State())
                         cell.dateButton.backgroundColor = UIColor.blue
                     }
                     
                     if indexPath.row % 7 == 0 {
-                        cell.dateButton.setTitleColor(UIColor.red, for: UIControlState())
+                        cell.dateButton.setTitleColor(UIColor.red, for: UIControl.State())
                     }
                 }
                 
@@ -197,7 +197,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 }
             } else {
                 cell.backgroundColor = UIColor.clear
-                cell.dateButton.setTitleColor(UIColor.clear, for: UIControlState())
+                cell.dateButton.setTitleColor(UIColor.clear, for: UIControl.State())
                 cell.dateButton.backgroundColor = UIColor.clear
             }
             
@@ -245,7 +245,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             return self.monthsHeaderView(kind: kind, indexPath: indexPath)
             
         default:
@@ -295,7 +295,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 0, 44, 0)
+        return UIEdgeInsets.init(top: 0, left: 0, bottom: 44, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

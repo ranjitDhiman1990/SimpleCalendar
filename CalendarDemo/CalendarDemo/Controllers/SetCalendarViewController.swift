@@ -45,17 +45,17 @@ class SetCalendarViewController: UIViewController {
         self.textStartDate.inputView = self.returnTimeInputView(1)
         self.textEndDate.inputView = self.returnTimeInputView(2)
         
-        if self.startDateString.characters.count > 0 {
+        if self.startDateString.count > 0 {
             self.textStartDate.text = self.startDateString
         }
         
-        if self.endDateString.characters.count > 0 {
+        if self.endDateString.count > 0 {
             self.textEndDate.text = self.endDateString
         }
     }
 
     @IBAction func generateCalendarButtonAction(_ sender: UIButton) {
-        if self.startDateString.characters.count > 0 && self.endDateString.characters.count > 0 {
+        if self.startDateString.count > 0 && self.endDateString.count > 0 {
             self.dismiss(animated: true, completion: {
                 self.delegate?.generateCalendarButtonTapped(startDateStr: self.startDateString, endDateStr: self.endDateString)
             })
@@ -78,7 +78,7 @@ class SetCalendarViewController: UIViewController {
             
             startDateAccessoryView?.warningLabel.text = ""
             
-            startDateAccessoryView?.nextButton.setTitle("Next", for: UIControlState())
+            startDateAccessoryView?.nextButton.setTitle("Next", for: UIControl.State())
             startDateAccessoryView?.nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
             startDateAccessoryView?.frame = CGRect(x: startDateAccessoryView!.frame.origin.x, y: startDateAccessoryView!.frame.origin.y, width: self.view.frame.size.width, height: startDateAccessoryView!.frame.size.height)
             self.textStartDate.inputAccessoryView = startDateAccessoryView!
@@ -89,10 +89,10 @@ class SetCalendarViewController: UIViewController {
         
         endDateAccessoryView = InputAccessoryView.instanceFromNib()
         if endDateAccessoryView != nil {
-            endDateAccessoryView?.previousButton.setTitle("Previous", for: UIControlState())
+            endDateAccessoryView?.previousButton.setTitle("Previous", for: UIControl.State())
             endDateAccessoryView?.previousButton.addTarget(self, action: #selector(previousButtonPressed), for: .touchUpInside)
             
-            endDateAccessoryView?.nextButton.setTitle("Done", for: UIControlState())
+            endDateAccessoryView?.nextButton.setTitle("Done", for: UIControl.State())
             endDateAccessoryView?.nextButton.addTarget(self, action: #selector(inputToolbarDonePressed), for: .touchUpInside)
             
             endDateAccessoryView?.warningLabel.text = ""
@@ -117,14 +117,14 @@ class SetCalendarViewController: UIViewController {
     
     func returnTimeInputView(_ tag:Int) -> UIDatePicker {
         let timePickerView  : UIDatePicker = UIDatePicker()
-        timePickerView.datePickerMode = UIDatePickerMode.date
+        timePickerView.datePickerMode = UIDatePicker.Mode.date
         if tag == 1 {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = dateFormat
             if let date = dateFormatter.date(from: startDateString) {
                 timePickerView.date = date
             }
-            timePickerView.addTarget(self, action: #selector(handleStartTimePicker(_:)), for: UIControlEvents.valueChanged)
+            timePickerView.addTarget(self, action: #selector(handleStartTimePicker(_:)), for: UIControl.Event.valueChanged)
         } else {
             if let minDate = TimeUtility.getDateFromString(dateString: self.startDateString, dateFormat: dateFormat) {
                 timePickerView.minimumDate = minDate
@@ -140,7 +140,7 @@ class SetCalendarViewController: UIViewController {
                 timePickerView.date = date
             }
             
-            timePickerView.addTarget(self, action: #selector(handleEndTimePicker(_:)), for: UIControlEvents.valueChanged)
+            timePickerView.addTarget(self, action: #selector(handleEndTimePicker(_:)), for: UIControl.Event.valueChanged)
         }
         
         return timePickerView
